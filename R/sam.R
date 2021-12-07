@@ -60,6 +60,7 @@ sam <- function(dat,
                 b_random = FALSE,
                 b_range = NULL,
                 lambda = 0,
+                lambda_Mesnil = 10000,
                 FreeADFun = FALSE
                 # retro.years = 0,
 ){

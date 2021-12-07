@@ -100,6 +100,7 @@ Type objective_function<Type>::operator() ()
   DATA_VECTOR(Fprocess_weight);
   DATA_SCALAR(F_RW_order); //0: first order, 1: second order
   DATA_SCALAR(lambda);
+  DATA_SCALAR(lambda_Mesnil);
 
   array<Type> logF(nlogF,U.cols()); // logF (6 x 50 matrix)
   array<Type> logN(nlogN,U.cols()); // logN (7 x 50 matrix)
@@ -447,6 +448,17 @@ Type objective_function<Type>::operator() ()
   for(int i=0; i<logB.size(); i++){
     ans += lambda*logB(i)*logB(i);
     }
+
+  // Penalty for Mesnil
+  if(stockRecruitmentModelCode==4){ //Mesnil HS
+    predN0(0)=ssb(i-minAge)+sqrt(square(exp(rec_logb))+square(gamma)/Type(4.0))-sqrt(square(ssb(i-minAge)-exp(rec_logb))+square(gamma)/Type(4.0));
+    predN0(0)*=exp(rec_loga)/Type(2.0);
+    predN0(0)=log(predN0(0));
+
+  if(stockRecruitmentModelCode == 4){
+    ans += lambda_Mesnil * max({(min(ssb)-exp(rec_logb)/exp(rec_loga))*(max(ssb)-exp(rec_logb)/exp(rec_loga)),
+                               0})
+  }
 
   SIMULATE {
     REPORT(logF);
