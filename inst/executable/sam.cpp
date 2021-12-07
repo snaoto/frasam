@@ -450,14 +450,10 @@ Type objective_function<Type>::operator() ()
     }
 
   // Penalty for Mesnil
-  if(stockRecruitmentModelCode==4){ //Mesnil HS
-    predN0(0)=ssb(i-minAge)+sqrt(square(exp(rec_logb))+square(gamma)/Type(4.0))-sqrt(square(ssb(i-minAge)-exp(rec_logb))+square(gamma)/Type(4.0));
-    predN0(0)*=exp(rec_loga)/Type(2.0);
-    predN0(0)=log(predN0(0));
-
   if(stockRecruitmentModelCode == 4){
-    ans += lambda_Mesnil * max({(min(ssb)-exp(rec_logb)/exp(rec_loga))*(max(ssb)-exp(rec_logb)/exp(rec_loga)),
-                               0})
+    if((min(ssb)-exp(rec_logb)/exp(rec_loga))*(max(ssb)-exp(rec_logb)/exp(rec_loga)) > 0){
+      ans += lambda_Mesnil*(min(ssb)-exp(rec_logb)/exp(rec_loga))*(max(ssb)-exp(rec_logb)/exp(rec_loga));
+    }
   }
 
   SIMULATE {
