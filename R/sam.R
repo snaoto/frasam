@@ -228,6 +228,7 @@ sam <- function(dat,
   }
   data$F_RW_order <- RW.Forder
   data$lambda <- lambda
+  data$lambda_Mesnil <- lambda_Mesnil
 
   U_init = rbind(
     matrix(5,nrow=ncol1,ncol=data$noYears),

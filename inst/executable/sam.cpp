@@ -451,8 +451,8 @@ Type objective_function<Type>::operator() ()
 
   // Penalty for Mesnil
   if(stockRecruitmentModelCode == 4){
-    if((min(ssb)-exp(rec_logb)/exp(rec_loga))*(max(ssb)-exp(rec_logb)/exp(rec_loga)) > 0){
-      ans += lambda_Mesnil*(min(ssb)-exp(rec_logb)/exp(rec_loga))*(max(ssb)-exp(rec_logb)/exp(rec_loga));
+    if((min(ssb)-exp(rec_logb))*(max(ssb)-exp(rec_logb)) > 0){
+      ans += lambda_Mesnil*(min(ssb)-exp(rec_logb))*(max(ssb)-exp(rec_logb));
     }
   }
 
