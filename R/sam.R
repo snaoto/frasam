@@ -265,7 +265,7 @@ sam <- function(dat,
         } else {
           log(a.init)
           },
-      rec_logb     = if (is.null(b.init)) {if (SR=="HS" | SR=="Mesnil") 1 else -14} else {log(b.init)},
+      rec_logb     = if (is.null(b.init)) {if (SR=="HS" | SR=="Mesnil") 13.5 else -14} else {log(b.init)},
       logit_rho  = if (is.null(rho.init)) 0 else log(rho.init/(1-rho.init)),
       # logScale     = numeric(data$noScaledYears),
       # logScaleSSB  = if(any(data$fleetTypes %in% c(3,4))) {numeric(0)} else {numeric(0)},
