@@ -451,9 +451,9 @@ Type objective_function<Type>::operator() ()
 
   // Penalty for Mesnil
   if(stockRecruitmentModelCode == 4){
-    if((min(ssb)-exp(rec_logb)/exp(rec_loga))*(max(ssb)-exp(rec_logb)) > 0){
-      ans += lambda_Mesnil*(min(ssb)-exp(rec_logb))*(max(ssb)-exp(rec_logb));
-    }
+    vector <Type> ssb_vector = ssb.rowwise().sum() ;
+    ans += CppAD::CondExpLt(ssb_vector.maxCoeff(), exp(rec_logb), lambda_Mesnil, Type(0)) ;
+    ans += CppAD::CondExpLt(exp(rec_logb), ssb_vector.minCoeff(), lambda_Mesnil, Type(0)) ;
   }
 
   SIMULATE {
